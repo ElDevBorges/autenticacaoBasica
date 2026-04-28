@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: projetoAutenticacao
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/bancoPA
+      - SPRING_DATASOURCE_USERNAME=eldevborges
+      - SPRING_DATASOURCE_PASSWORD=Lf19092019f-
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16-alpine
+    container_name: projetoAutenticacao-db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=bancoPA
+      - POSTGRES_USER=eldevborges
+      - POSTGRES_PASSWORD=Lf19092019f-
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
